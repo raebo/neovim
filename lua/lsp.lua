@@ -11,8 +11,12 @@ require("mason-lspconfig").setup({
     "typescript-language-server",
     "solargraph",
     "html-lsp",
+    "jsonls",
+    "cssls",
+    "html",
     "css-lsp",
     "json-lsp",
+    "jdtls", --java
   }
 })
 

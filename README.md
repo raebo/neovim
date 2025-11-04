@@ -100,3 +100,26 @@ ln -s ~/.local/share/lua-lang-server/bin/lua-language-server ~/.local/bin/lua-la
 ```bash
  export PATH=$PATH:~/.local/bin
 ```
+
+
+# HELP HELP
+
+* for a fresh install backup and remove the plugins
+
+
+# Backup your config first
+
+```bash
+cp -r ~/.config/nvim ~/.config/nvim.backup
+```
+
+# Remove all plugins and cache
+
+
+```bash
+rm -rf ~/.local/share/nvim
+rm -rf ~/.local/state/nvim
+rm -rf ~/.cache/nvim
+```
+
+* After that 
