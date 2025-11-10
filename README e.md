@@ -55,6 +55,26 @@ with **LSP support**, **fuzzy finding**, **snippets**, and **tab/file management
 
 ## Installation
 
+### Install font with nerdfon
+
+* check if a nerd font is on your system installed
+
+
+```bash
+fc-list | grep -i nerd
+```
+
+* installation e.g. for JetBrainsMono
+
+```bash
+  sudo mkdir -p /usr/local/share/fonts
+  cd /usr/local/share/fonts
+  sudo wget -O JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+  sudo unzip -o JetBrainsMono.zip -d JetBrainsMono
+  sudo rm JetBrainsMono.zip
+  fc-cache -fv
+```
+
 ### 1️⃣ Install Neovim (unstable / nightly)
 
 **Linux (Debian/Ubuntu example)**:

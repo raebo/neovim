@@ -21,29 +21,52 @@ require("lazy").setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     keys = {
       { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
-      { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+      { "<leader>fg", function() require("telescope.builtin").live_grep() end,  desc = "Live grep" },
+      { "<leader>bb", function() require("telescope.builtin").buffers() end,    desc = "Find buffers" },
+      { "<leader>fh", function() require("telescope.builtin").help_tags() end,  desc = "Help tags" },
     },
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-j>"] = require("telescope.actions").move_selection_next,
+              ["<C-k>"] = require("telescope.actions").move_selection_previous,
+            }
+          }
+        },
+        extensions = {
+          recent_files = {
+            -- This extension's options, see below.
+          }
+        }
+      })
+    end
   },
 
--- Treesitter
-{
+  {
+    "smartpde/telescope-recent-files"
+  },
+
+  -- Treesitter
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-        ensure_installed = {
-            "lua",
-            "vim",
-            "vimdoc",
-            "html",
-            "css",
-            "javascript",
-            "typescript",
-            "tsx",
-            "jsdoc",
-            "json",
-            "ruby",
-            "java",
-            "jsx",
-        },
+      ensure_installed = {
+        "lua",
+        "vim",
+        "vimdoc",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "tsx",
+        "jsdoc",
+        "json",
+        "ruby",
+        "java",
+        "jsx",
+      },
     },
 
   },
@@ -131,6 +154,20 @@ require("lazy").setup({
     end,
   },
 
+  --- session handling project based
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      -- log_level = 'debug',
+    },
+  },
+
   --- nerdtree
   {
     "nvim-tree/nvim-tree.lua",
@@ -142,12 +179,27 @@ require("lazy").setup({
       })
     end,
   },
+
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = {
+      "rafamadriz/friendly-snippets", -- collection of pre-made snippets
+    },
+    config = function()
+      require("luasnip").config.setup({})
+      require("luasnip/loaders/from_vscode").lazy_load() -- load vscode-style snippets
+    end,
+  },
+
   ---- comment
   {
-  "numToStr/Comment.nvim",
-  config = function()
-    require("Comment").setup()
-  end,
-}
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  },
+
+  --- toggle term
+  { 'akinsho/toggleterm.nvim', version = "*", config = true }
 
 })

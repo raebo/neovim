@@ -1,3 +1,5 @@
+local opts = { noremap = true, silent = true }
+local api = require("nvim-tree.api")
 vim.g.mapleader = " " -- Space as leader
 
 local map = vim.keymap.set
@@ -36,23 +38,77 @@ map("n", "<leader>fg", function()
 end, { desc = "Live grep" })
 
 -- Tabs
---map("n", "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
---map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
---map("n", "<leader>tl", ":tabnext<CR>", { desc = "Next tab" })
---map("n", "<leader>th", ":tabprevious<CR>", { desc = "Previous tab" })
+--map("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "Close tab" })
+--map("n", "<leader>tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
+--map("n", "<leader>th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
 
-map("n", "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
-map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
-map("n", "<leader>tl", ":tabnext<CR>", { desc = "Next tab" })
-map("n", "<leader>th", ":tabprevious<CR>", { desc = "Previous tab" })
-
+-- Buffer navigation (what you probably need)
+map("n", "<tab>", "<cmd>b#<CR>", { desc = "Switch to last buffer" })
+map("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<leader>bl", "<cmd>buffers<CR>", { desc = "List buffers" })
 
 -- File Explorer
-map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
+local function ToggleNvimTreeFocus()
+  --local api = require("nvim-tree.api")
+  local view = require("nvim-tree.view")
+  local buf_name = vim.api.nvim_buf_get_name(0)
+
+  if view.is_visible() then
+    if buf_name:match("NvimTree_") then
+      -- We're in NvimTree, go back to last file window
+      vim.cmd("wincmd p")
+    else
+      -- Focus the tree without closing it
+      api.tree.focus()
+    end
+  else
+    -- Tree is closed, open it
+    vim.cmd("NvimTreeOpen")
+  end
+end
+
+map('n', '<leader>e', ToggleNvimTreeFocus, { desc = "Focus/Toggle NvimTree", silent = true })
+--map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
 map("n", "<leader>fe", ":NvimTreeFocus<CR>", { desc = "Focus File Explorer" })
+
 
 -- Visual mode indent right/left
 --map("v", "<leader>>", ">gv", { desc = "Indent selection right" })
 --map("v", "<leader><", "<gv", { desc = "Indent selection left" })
 map("v", "<Tab>", ">gv", { desc = "Indent right" })
 map("v", "<S-Tab>", "<gv", { desc = "Indent left" })
+
+
+-- Split windows
+map('n', '<leader>sv', ':vsplit<CR>', opts) -- vertical split
+map('n', '<leader>sh', ':split<CR>', opts)  -- horizontal split
+map('n', '<leader>sc', ':close<CR>', opts)  -- close current split
+map('n', '<leader>so', ':only<CR>', opts)   -- keep only current split
+
+-- Move between windows (easier than <C-w>h etc.)
+map('n', '<C-h>', '<C-w>h', opts) -- control + h
+map('n', '<C-j>', '<C-w>j', opts) -- control + j
+map('n', '<C-k>', '<C-w>k', opts) -- control + k
+map('n', '<C-l>', '<C-w>l', opts) -- control + l
+
+-- Resize windows
+map('n', '<C-Up>', ':resize -2<CR>', opts)
+map('n', '<C-Down>', ':resize +2<CR>', opts)
+map('n', '<C-Left>', ':vertical resize -2<CR>', opts)
+map('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+
+-- Equalize window sizes
+map('n', '<leader>=', '<C-w>=', opts)
+
+
+-- Terminal settings
+-- Open terminal in horizontal split
+vim.keymap.set('n', '<leader>1', ':split | terminal<CR>', { noremap = true, silent = true })
+
+-- Open terminal in vertical split
+vim.keymap.set('n', '<leader>2', ':vsplit | terminal<CR>', { noremap = true, silent = true })
+
+-- Exit terminal mode quickly
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
