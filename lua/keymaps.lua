@@ -36,6 +36,14 @@ map("n", "<leader>fg", function()
     hidden = true,
   })
 end, { desc = "Live grep" })
+map("n", "<leader>fb", function()
+  require("telescope.builtin").buffers({
+    sort_mru = true,
+    ignore_current_buffer = true,
+    prompt_title = "Buffers",
+  })
+end, { desc = "List open buffers" })
+
 
 -- Tabs
 --map("n", "<leader>tc", "<cmd>tabclose<CR>", { desc = "Close tab" })
@@ -112,3 +120,29 @@ vim.keymap.set('n', '<leader>2', ':vsplit | terminal<CR>', { noremap = true, sil
 
 -- Exit terminal mode quickly
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+
+
+---- git keybindings
+-- For fugitive
+vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
+vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "Git blame" })
+
+-- For gitsigns
+vim.keymap.set("n", "]g", require("gitsigns").next_hunk, { desc = "Next git hunk" })
+vim.keymap.set("n", "[g", require("gitsigns").prev_hunk, { desc = "Prev git hunk" })
+vim.keymap.set("n", "<leader>gp", require("gitsigns").preview_hunk, { desc = "Preview git hunk" })
+
+-- Open Diffview (compare working tree to HEAD)
+vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "Open Diffview" })
+
+-- Close Diffview
+vim.keymap.set("n", "<leader>dc", ":DiffviewClose<CR>", { desc = "Close Diffview" })
+
+-- Open Diffview for current file
+vim.keymap.set("n", "<leader>df", ":DiffviewFileHistory %<CR>", { desc = "File history for current file" })
+
+-- Open Diffview for entire repo history
+vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "Repository file history" })
+
+-- Toggle the file panel (when Diffview is open)
+vim.keymap.set("n", "<leader>dt", ":DiffviewToggleFiles<CR>", { desc = "Toggle Diffview file panel" })

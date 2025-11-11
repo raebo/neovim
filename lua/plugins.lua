@@ -200,6 +200,39 @@ require("lazy").setup({
   },
 
   --- toggle term
-  { 'akinsho/toggleterm.nvim', version = "*", config = true }
+  {
+    'akinsho/toggleterm.nvim', version = "*", config = true
+  },
+
+  -- github copilot
+  {
+    "github/copilot.vim",
+    lazy = false, -- lazy loading
+    config = function()
+      vim.g.copilot_assume_mapped = true
+    end,
+  },
+
+  -- git plugins
+  {
+    "tpope/vim-fugitive",
+    cmd = { "Git", "Gwrite", "Gread", "Gdiffsplit", "Gblame" }
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("gitsigns").setup()
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewClose",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+    }
+  }
 
 })
