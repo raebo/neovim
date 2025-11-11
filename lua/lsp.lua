@@ -1,6 +1,5 @@
 local lspconfig = require("lspconfig")
 local mason = require("mason")
-local mason_lsp = require("mason-lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 -- Mason setup
@@ -8,14 +7,11 @@ mason.setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua-language-server",
-    "typescript-language-server",
-    "solargraph",
-    "html-lsp",
+    "tsserver",
+    "ruby-lsp",
+    "html",
     "jsonls",
     "cssls",
-    "html",
-    "css-lsp",
-    "json-lsp",
     "jdtls", --java
   }
 })
@@ -52,4 +48,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ async = false })
   end,
 })
-

@@ -55,7 +55,7 @@ with **LSP support**, **fuzzy finding**, **snippets**, and **tab/file management
 
 ## Installation
 
-### Install font with nerdfon
+### Install font with nerdfonts
 
 * check if a nerd font is on your system installed
 
@@ -74,6 +74,15 @@ fc-list | grep -i nerd
   sudo rm JetBrainsMono.zip
   fc-cache -fv
 ```
+
+### Install Livegrep dependencies
+
+```bash 
+sudo apt install ripgrep fd-find
+```
+
+
+
 
 ### 1️⃣ Install Neovim (unstable / nightly)
 
