@@ -7,7 +7,6 @@ return {
         "lua",
         "vim",
         "vimdoc",
-        
         -- Web Development
         "html",
         "css",
@@ -16,16 +15,20 @@ return {
         "tsx",           -- React TypeScript
         "jsdoc",
         "json",
-        
         -- Ruby
         "ruby",
-        
         -- Java
         "java",
-        
         -- JSX/React
         "jsx",
       },
+      -- Install missing parsers automatically when entering buffers
+      auto_install = true,
+      -- Do not block startup on parser installation
+      sync_install = false,
+      highlight = {
+        enable = true,
+      }
     },
   },
 }

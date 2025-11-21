@@ -16,11 +16,6 @@ map("n", "<leader>ff", function()
   })
 end, { desc = "Find files" })
 
-map("n", "<leader>fg", function()
-  require("telescope.builtin").live_grep({
-    hidden = true,
-  })
-end, { desc = "Live grep" })
 
 map("n", "<leader>ff", function()
   require("telescope.builtin").find_files({
@@ -33,9 +28,10 @@ end, { desc = "Find files" })
 
 map("n", "<leader>fg", function()
   require("telescope.builtin").live_grep({
-    hidden = true,
+    hidden = false,
   })
 end, { desc = "Live grep" })
+
 map("n", "<leader>fb", function()
   require("telescope.builtin").buffers({
     sort_mru = true,
@@ -78,6 +74,8 @@ local function ToggleNvimTreeFocus()
 end
 
 map('n', '<leader>e', ToggleNvimTreeFocus, { desc = "Focus/Toggle NvimTree", silent = true })
+map('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
+map('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { silent = true }) -- this will opent the tree a the position of the current file
 --map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
 map("n", "<leader>fe", ":NvimTreeFocus<CR>", { desc = "Focus File Explorer" })
 
@@ -146,3 +144,41 @@ vim.keymap.set("n", "<leader>dh", ":DiffviewFileHistory<CR>", { desc = "Reposito
 
 -- Toggle the file panel (when Diffview is open)
 vim.keymap.set("n", "<leader>dt", ":DiffviewToggleFiles<CR>", { desc = "Toggle Diffview file panel" })
+
+
+--- Nviem-tree keybindings
+--- Default keybindings are usually fine, but here are some examples:
+-- Open file or folder
+---vim.keymap.set("n", "<leader>o", api.node.open.edit, { desc = "Open file/folder" })
+-- Create new file or folder
+-- vim.keymap.set("n", "a", api.fs.create, { desc = "Create file/folder" })
+-- Delete file or folder
+-- vim.keymap.set("n", "d", api.fs.remove, { desc = "
+-- Delete file/folder" })
+-- Rename file or folder
+-- vim.keymap.set("n", "r", api.fs.rename, { desc = "Rename file/folder" })
+-- Refresh the tree
+-- vim.keymap.set("n", "R", api.tree.reload, { desc = "Refresh NvimTree" })
+-- Collapse all folders
+-- vim.keymap.set("n", "z", api.tree.collapse_all, { desc
+-- = "Collapse all folders" })
+-- Toggle hidden files
+-- vim.keymap.set("n", "H", api.tree.toggle_hidden_filter, { desc
+-- = "Toggle hidden files" })
+-- Preview file in a floating window
+-- vim.keymap.set("n", "p", api.node.open.preview, { desc =
+-- "Preview file" })
+-- Copy file path to clipboard
+-- vim.keymap.set("n", "y", api.fs.copy.node, { desc =
+-- "Copy file/folder" })
+-- Paste file or folder
+-- vim.keymap.set("n", "x", api.fs.paste, { desc =
+-- "Paste file/folder" })
+-- Cut file or folder
+-- vim.keymap.set("n", "c", api.fs.cut, { desc =
+-- "Cut file/folder" })
+-- Open terminal in the current file's directory
+-- vim.keymap.set("n", "t", api.tree.open_terminal, { desc =
+-- "Open terminal" })
+-- Go up one directory
+-- vim.keymap.set("n", "u", api.tree.change_root_to_parent, {

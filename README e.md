@@ -24,6 +24,12 @@ with **LSP support**, **fuzzy finding**, **snippets**, and **tab/file management
 - Auto-format on save
 - Diagnostic floating windows with rounded borders
 
+* To uninstall a language server use Mason
+
+```bash
+:MasonUninstall solargraph
+```
+
 ### Autocompletion & Snippets
 
 - Powered by [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -81,7 +87,12 @@ fc-list | grep -i nerd
 sudo apt install ripgrep fd-find
 ```
 
+### Install Ruby-LSP dependencies
 
+```bash 
+ gem install ruby-lsp
+ gem install debug
+```
 
 
 ### 1️⃣ Install Neovim (unstable / nightly)
