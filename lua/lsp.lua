@@ -6,15 +6,15 @@ local cmp_nvim_lsp = require("cmp_nvim_lsp")
 mason.setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
-    "lua-language-server",
-    "tsserver",
-    "ruby-lsp",
+    "lua_ls",
+    "ts_ls",
+    "ruby_lsp",
     "html",
     "jsonls",
     "cssls",
     "jdtls", --java
   }
-})
+})  
 
 -- Capabilities for nvim-cmp
 local capabilities = cmp_nvim_lsp.default_capabilities()
